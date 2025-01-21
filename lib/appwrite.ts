@@ -61,3 +61,21 @@ client
           return false;
         }
       }
+
+      export async function getCurrentUser() {
+        try {
+            const response = await account.get();
+            if(response.$id) {
+                const userAvatar = avatar.getInitials(response.name);
+
+                return {
+                    ...response,
+                    avatar: userAvatar.toString()
+                };
+            }
+            return response;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+      }
