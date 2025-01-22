@@ -39,9 +39,9 @@ const SignIn = () => {
             Let's Get You In {"\n"}
             <Text className="text-primary-300">Your Next Home</Text>
           </Text>
-          <Text className="text-lg font-rubik text-black-200 text-center mt-12">
+          {/* <Text className="text-lg font-rubik text-black-200 text-center mt-12">
             Login to ReState with Google
-          </Text>
+          </Text> */}
 
           <TouchableOpacity 
             onPress={handleLogin} 
