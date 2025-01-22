@@ -1,15 +1,22 @@
-import { View, Text, TextInput, Image } from 'react-native'
+import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { useLocalSearchParams, usePathname } from 'expo-router';
+import { useLocalSearchParams, usePathname, router } from 'expo-router';
 import icons from '@/constants/icons';
+import { useDebouncedCallback } from "use-debounce";
+
 
 const Search = () => {
 const path = usePathname();
 const params = useLocalSearchParams<{query?: string}>();
 const [search, setSearch] = useState(params.query);
 
+const debouncedSearch = useDebouncedCallback((text: string) => {
+    router.setParams({ query: text });
+  }, 500);
+
 const handleSearch = (text: string) => {
     setSearch(text);
+    debouncedSearch(text);
 }
 
   return (
@@ -23,6 +30,10 @@ const handleSearch = (text: string) => {
             className='text-sm font-rubik text-black-300'
         />
       </View>
+
+      <TouchableOpacity>
+        <Image source={icons.filter} className='size-5' />
+      </TouchableOpacity>
     </View>
   )
 }
